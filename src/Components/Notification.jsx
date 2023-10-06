@@ -22,18 +22,35 @@ const Header = styled.header`
 `;
 const Notifications = styled.div`
   display: flex;
-
+  padding: 17px;
   margin-top: 25px;
+  border-radius: 10px;
 `;
 const Img = styled.img`
   width: 45px;
   height: 45px;
   margin-right: 19px;
 `;
+const TitleContainer = styled.div`
+  display: flex;
+  column-gap: 11px;
+`;
 const Title = styled.h1`
   font-size: 24px;
   font-weight: 800;
   color: #1c202b;
+`;
+const NotificationNumber = styled.span`
+  color: #fff;
+  font-size: 16px;
+  padding: 3px 8px;
+  background-color: #0a327b;
+  border-radius: 6px;
+`;
+const Button = styled.button`
+  cursor: pointer;
+  border: none;
+  background: none;
 `;
 const DetailsWrap = styled.div`
   display: flex;
@@ -56,17 +73,44 @@ const Time = styled.span`
 `;
 const Notification = () => {
   const [userData, setUserData] = useState(data);
+
+  const markAsRad = () => {
+    const clone = [...userData].map((item) => {
+      item.read = true;
+      return item;
+    });
+    setUserData(clone);
+  };
+
+  const handleSingleClick = (index) => {
+    const clone = [...userData];
+    clone[index].read = true;
+    setUserData(clone);
+  };
+  
   return (
     <Wrapper>
       <Container>
         <Header>
-          <Title>Notifications</Title>
-          <p>Mark all as read</p>
+          <TitleContainer>
+            <Title>Notifications</Title>
+            <NotificationNumber>
+              {userData.filter((item) => !item.read).length}
+            </NotificationNumber>
+          </TitleContainer>
+          <Button onClick={markAsRad}>Mark all as read</Button>
         </Header>
         <div>
-          {userData.map((item) => {
+          {userData.map((item, index) => {
             return (
-              <Notifications>
+              <Notifications
+                onClick={() => {
+                  handleSingleClick(index);
+                }}
+                style={
+                  item.read ? { background: "#fff" } : { background: "#e1f0fe" }
+                }
+              >
                 <Img
                   src={`./images/avatar-${item.author
                     .replace(" ", "-")
