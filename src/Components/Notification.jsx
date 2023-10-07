@@ -53,19 +53,49 @@ const Button = styled.button`
   background: none;
 `;
 const DetailsWrap = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
+  text-align: left;
 `;
+const DetailsContainer = styled.div``;
 const Author = styled.span`
   font-size: 16px;
   font-weight: 800;
   color: #1c202b;
+  cursor: pointer;
+  &:hover {
+    color: #0a327b;
+  }
 `;
+
 const Type = styled.span`
   color: #5e6778;
   font-size: 16px;
   margin: 0 7px;
+`;
+const Content = styled.div`
+  display: inline;
+  cursor: pointer;
+  &:hover {
+    color: #0a327b;
+  }
+`;
+const Message = styled.div`
+  margin-top: 13px;
+  background-color: #e5effa;
+  color: #5e6778;
+  cursor: pointer;
+`;
+const ContentImg = styled.img`
+  max-width: 45px;
+  max-height: 45px;
+  cursor: pointer;
+`;
+const ActivePoint = styled.div`
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: #f65552;
+  margin-left: 6px;
 `;
 const Time = styled.span`
   color: #939cad;
@@ -87,7 +117,7 @@ const Notification = () => {
     clone[index].read = true;
     setUserData(clone);
   };
-  
+
   return (
     <Wrapper>
       <Container>
@@ -118,18 +148,38 @@ const Notification = () => {
                   alt=""
                 />
                 <DetailsWrap>
-                  <div>
+                  <DetailsContainer>
                     <Author>{item.author}</Author>
                     <Type>{item.type}</Type>
-
-                    {/* {item.content.includes(".webp") ? (
-                      <img src={item.content} />
-                    ) : (
-                      <span>{item.content}</span>
-                    )} */}
-                    <span>{item.content}</span>
-                  </div>
+                    <ContentImg src={item.img} alt="" />
+                    <Content
+                      style={
+                        item.type == "left the group" ||
+                        item.type == "has joined your group"
+                          ? {
+                              color: "#0A3278",
+                              fontSize: "16px",
+                              fontWeight: 800,
+                            }
+                          : {
+                              color: "#5E6778",
+                              fontSize: "16px",
+                              fontWeight: 800,
+                            }
+                      }
+                    >
+                      {item.content}
+                    </Content>
+                    {item.read ? null : <ActivePoint></ActivePoint>}{" "}
+                  </DetailsContainer>
                   <Time>{item.time}</Time>
+                  <Message
+                    style={
+                      item.message ? { padding: "17px 20px" } : { padding: "0" }
+                    }
+                  >
+                    {item.message}
+                  </Message>
                 </DetailsWrap>
               </Notifications>
             );

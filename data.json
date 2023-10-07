@@ -23,14 +23,16 @@
     "author": "Rizky Hasanuddin",
     "time": "5 days ago",
     "type": "sent you a private message",
-    "content": "Hello, thanks for setting up the Chess Club. I’ve been a member for a few weeks now and I’m already having lots of fun and improving my game.",
+    "content": "",
+    "message": "Hello, thanks for setting up the Chess Club. I’ve been a member for a few weeks now and I’m already having lots of fun and improving my game.",
     "read": true
   },
   {
     "author": "Kimberly Smith",
     "time": "1 week ago",
     "type": "commented on your picture",
-    "content": "./images/image-chess.webp",
+    "img": "./images/image-chess.webp",
+    "content": "",
     "read": true
   },
   {
